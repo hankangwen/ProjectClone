@@ -1,7 +1,7 @@
 {
     "name": "com.hankangwne.projectclone",
     "displayName": "ProjectClone",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "unity": "2021.3",
     "description": "ProjectClone is a Unity editor extension that allows users to test multiplayer gameplay without building the project by having another Unity editor window opened and mirror the changes from the original project.",
     "license": "MIT",
