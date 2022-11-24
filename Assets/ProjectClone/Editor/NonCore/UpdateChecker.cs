@@ -28,7 +28,7 @@ namespace ProjectClone.NonCore
                                          +"Latest Version: " + latestVersionText + "\n";
                     var latestVersion = new Version(latestVersionText);
                     var localVersion = new Version(localVersionText);
-
+            
                     if (latestVersion > localVersion)
                     {
                         Debug.Log("There's a newer version");
@@ -65,8 +65,7 @@ namespace ProjectClone.NonCore
             if (_localVersionText == string.Empty)
             {
                 var scriptPath = CallerManager.GetCaller().SourceFilePath;
-
-                string separator = @"\";
+                char[] separator = new char[1] { '\\' };
                 string[] pathArray = scriptPath.Split(separator);
                 
                 int index = 0;
@@ -80,7 +79,7 @@ namespace ProjectClone.NonCore
                 }
                 string[] result = new string[index];
                 Array.Copy(pathArray, 0, result, 0, index);
-                string rootPath = string.Join(separator, result.ToArray());
+                string rootPath = string.Join(separator[0].ToString(), result.ToArray());
                 _localVersionText = File.ReadAllText(rootPath + @"\VERSION.txt");
             }
             
