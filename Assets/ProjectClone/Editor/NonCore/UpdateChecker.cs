@@ -55,7 +55,6 @@ namespace ProjectClone.NonCore
                 }
             }
         }
-
         
         /// <summary>
         /// GetLocalVersionText
@@ -66,20 +65,22 @@ namespace ProjectClone.NonCore
             if (_localVersionText == string.Empty)
             {
                 var scriptPath = CallerManager.GetCaller().SourceFilePath;
-                string separator = @"\";
-                List<string> pathArray = scriptPath.Split(separator).ToList<string>();
-                int count = 0;
-                for (int i = pathArray.Count()-1; i > 0; i--)
-                {
-                    count++;
-                    if(pathArray[i] == "Editor") break;
-                }
 
-                List<string> result = new List<string>();
-                for (int i = 0; i < pathArray.Count() - count; i++)
-                    result.Add(pathArray[i]);
+                string separator = @"\";
+                string[] pathArray = scriptPath.Split(separator);
+                
+                int index = 0;
+                for (int i = pathArray.Count() - 1; i > 0; i--)
+                {
+                    if (pathArray[i] == "Editor")
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                string[] result = new string[index];
+                Array.Copy(pathArray, 0, result, 0, index);
                 string rootPath = string.Join(separator, result.ToArray());
-            
                 _localVersionText = File.ReadAllText(rootPath + @"\VERSION.txt");
             }
             
