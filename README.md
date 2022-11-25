@@ -50,6 +50,8 @@ to the `Packages/manifest.json` file
 Currently, ParrelSync supports Windows, macOS and Linux editors.  
 
 ![image](https://user-images.githubusercontent.com/46420877/203921117-c7929b10-7167-41ea-bd0c-f30d57d668f2.png)
+
 ![image](https://user-images.githubusercontent.com/46420877/203921118-b633792e-72fe-4b30-b640-9f14a2bdb84f.png)
+
 ![image](https://user-images.githubusercontent.com/46420877/203921165-f1289e5b-bb4a-4b27-9c71-a8fedd7a3946.png)
 
