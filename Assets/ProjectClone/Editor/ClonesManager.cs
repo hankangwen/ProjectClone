@@ -133,6 +133,66 @@ namespace ProjectClone
             return cloneProject;
         }
 
+        public static void CreateCloneFromCurrent2()
+        {
+            if (IsClone())
+            {
+                Debug.LogError("This project is already a clone. Cannot clone it.");
+                return;
+            }
+
+            CloneConfirmWindow.InitWindow();
+        }
+        
+        public static void CreateCloneWithParams(string sourcePath, List<string> copyFolders, List<string> linkFolders)
+        {
+            string cloneProjectPath = null;
+            
+            for (int i = 0; i < MaxCloneProjectCount; i++)
+            {
+                string originalProjectPath = ClonesManager.GetCurrentProject().projectPath;
+                string possibleCloneProjectPath = originalProjectPath + ClonesManager.CloneNameSuffix + "_" + i;
+
+                if (!Directory.Exists(possibleCloneProjectPath))
+                {
+                    cloneProjectPath = possibleCloneProjectPath;
+                    break;
+                }
+            }
+
+            if (string.IsNullOrEmpty(cloneProjectPath))
+            {
+                Debug.LogError("The number of cloned projects has reach its limit. Limit: " + MaxCloneProjectCount);
+                return;
+            }
+            
+            Project cloneProject = new Project(cloneProjectPath);
+            cloneProjectPath = cloneProjectPath + "/";
+            Debug.Log("Start cloning project, original project: " + sourcePath + "\n, clone project: \n" + cloneProjectPath);
+            
+            ClonesManager.CreateProjectFolder(cloneProject);
+            
+            //Copy Folders           
+            foreach (var item in copyFolders)
+            {
+                string s_path = sourcePath + item;
+                string t_path = cloneProjectPath + item;
+                Debug.Log("copying: " + s_path);
+                ClonesManager.CopyDirectoryWithProgressBar(s_path, t_path, "Cloning Project '" + item + "'. ");
+            }
+            
+            // Link Folders
+            foreach (var item in linkFolders)
+            {
+                string s_path = sourcePath + item;
+                string t_path = cloneProjectPath + item;
+                Debug.Log("linking: " + s_path);
+                ClonesManager.LinkFolders(s_path, t_path);
+            }
+            
+            ClonesManager.RegisterClone(cloneProject);
+        }
+
         /// <summary>
         /// Registers a clone by placing an identifying ".clone" file in its root directory.
         /// </summary>
@@ -654,6 +714,12 @@ namespace ProjectClone
         {
             System.Diagnostics.Process.Start(@path);
         }
+
+        public static string SelectFileInFileExplorer(string title, string openDirectory, string extension = null)
+        {
+            return EditorUtility.OpenFilePanel(title, openDirectory, extension);
+        }
+        
         #endregion
     }
 }

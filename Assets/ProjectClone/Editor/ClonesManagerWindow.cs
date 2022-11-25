@@ -168,7 +168,7 @@ namespace ProjectClone
 
                     if (GUILayout.Button("Add new clone"))
                     {
-                        ClonesManager.CreateCloneFromCurrent();
+                        ClonesManager.CreateCloneFromCurrent2();
                     }
                     
                     GUILayout.EndVertical(); //HelpBox
@@ -180,7 +180,7 @@ namespace ProjectClone
                     EditorGUILayout.HelpBox("No project clones found. Create a new one!", MessageType.Info);
                     if (GUILayout.Button("Create new clone"))
                     {
-                        ClonesManager.CreateCloneFromCurrent();
+                        ClonesManager.CreateCloneFromCurrent2();
                     }
                 }
             }
