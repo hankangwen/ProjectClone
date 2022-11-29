@@ -10,14 +10,14 @@ ProjectClone is a Unity editor extension that allows users to test multiplayer g
 为Unity多开工程提供一种解决方案。  
 使用微软的mklink创建软联接。
 
-<br>
+<!-- <br>
 
 ![ShortGif](https://raw.githubusercontent.com/VeriorPies/ParrelSync/master/Images/Showcase%201.gif)
 <p align="center">
 <b>Test project changes on clients and server within seconds - both in editor
 </b>
 <br>
-</p>
+</p> -->
 
 ## Features
 1. Test multiplayer gameplay without building the project
